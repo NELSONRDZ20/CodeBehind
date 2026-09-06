@@ -1,0 +1,157 @@
+﻿@page
+@model CodeBehind.Pages.IndexModel
+@{
+}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-9">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Servicio de mantenimeinto</h4>
+                </div>
+
+                <div class="card-body p-4">
+                    <form method="post">
+
+                   
+
+                        <!-- Primera fila -->
+                        <div class="row g-3">
+
+                            <div class="col-md-6">
+                                <label id="lblTipoServicio" for="ddlTipoServicio" class="form-label">Tipo de servicio</label>
+                                <select id="ddlTipoServicio" asp-for="tipoServicio" class="form-select">
+                                    <option value="0">Seleccione</option>
+                                    <option value="1">Limpieza Interna</option>
+                                    <option value="2">Mantenimiento Preventivo</option>
+                                    <option value="3">Cambio de pasta termica</option>
+                                    <option value="4">Formateo e instalación"</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label id="lblTipoEquipo" for="ddlTipoEquipo" class="form-label">Tipo de equipo</label>
+                                <select id="ddlTipoEquipo" asp-for="tipoEquipo" class="form-select">
+                                    <option value="0">Seleccione</option>
+                                    <option value="1">Laptop </option>
+                                    <option value="2">Pc de escritorio</option>
+                                    <option value="3">All-in-One</option>
+                                    <option value="4">Mac</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <label id="txtAntiguedad" for="txtAntiguedad" class="form-label">Antiguedad</label>
+                                <div class="input-group">
+                                <input id="txtAntiguedad" asp-for="antiguedad" class="form-control" type="number" />
+                                <span class="input-group-text">años</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label id="lblNumEquipos" for="ddlNumEquipos" class="form-label">Numero de equipos</label>
+                                <input id="ddlNumEquipos" asp-for="numequipos" class="form-control" type="number" />
+                                    
+                            </div>
+
+                            <div class="col-md-6">
+                                <label id="lblGarantia" for="ddlGarantia" class="form-label">Garantia Extendida</label>
+                                <select id="ddlGarantia" asp-for="garantia" class="form-select">
+                                    <option value="0">Seleccione</option>
+                                    <option value="1">30 dias</option>
+                                    <option value="2">90 dias</option>
+                                    <option value="3">180 dias</option>
+                                </select>
+                            </div>
+
+                           
+
+                            <div class="col-md-6">
+                                <label id="lblIva" for="txtIva" class="form-label">IVA</label>
+                                <div class="input-group">
+                                    <input id="txtIva" asp-for="iva" class="form-control" type="number" value="16" readonly />
+                                    <span class="input-group-text">%</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Separador -->
+                        <hr class="my-4">
+                        <div class="mb-4">
+                            <label class="form-label">Prioridad del servicio</label>
+
+                            <div class="border rounded p-3">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input"
+                                           type="radio"
+                                           asp-for="PrioridadServicio"
+                                           value="Normal"
+                                           id="prioridadNormal">
+
+                                    <label class="form-check-label" for="prioridadNormal">
+                                        Normal ($0)
+                                    </label>
+                                </div>
+
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input"
+                                           type="radio"
+                                           asp-for="PrioridadServicio"
+                                           value="Urgente"
+                                           id="prioridadUrgente">
+
+                                    <label class="form-check-label" for="prioridadUrgente">
+                                        Urgente ($200)
+                                    </label>
+                                </div>
+
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input"
+                                           type="radio"
+                                           asp-for="PrioridadServicio"
+                                           value="Express"
+                                           id="prioridadExpress">
+
+                                    <label class="form-check-label" for="prioridadExpress">
+                                        Express ($400)
+                                    </label>
+                                </div>
+                            </div>
+
+                            <span asp-validation-for="PrioridadServicio"
+                                  class="text-danger"></span>
+                        </div>
+                        <hr class="my-4">
+
+
+                        <!-- Resultado -->
+                        @if (!string.IsNullOrEmpty(Model.ResultadoOk))
+                        {
+                            <div class=" alert alert-success mt-2 p-2 text-center">
+                                @Html.Raw(Model.ResultadoOk)
+
+                            </div>
+
+                        }
+                        @if (!string.IsNullOrEmpty(Model.ResultadoNoOk))
+                        {
+                            <div class=" alert alert-danger mt-2 p-2 text-center">
+                                @Html.Raw(Model.ResultadoNoOk)
+
+                            </div>
+
+                        }
+                        <!-- Botones -->
+                        <div class="d-flex justify-content-end gap-2">
+                            <button type="submit" class="btn btn-outline-secondary" asp-page-handler="limpiar">Limpiar</button>
+                            <button type="submit" class="btn btn-info px-4" asp-page-handler="Guardar">Guardar</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

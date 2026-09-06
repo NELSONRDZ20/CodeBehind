@@ -1,0 +1,183 @@
+﻿@page
+@model CodeBehind.Pages.ReservaciondehotelModel
+@{
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-9">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Registro de venta</h4>
+                </div>
+
+                <div class="card-body p-4">
+                    <form method="post">
+
+                   
+
+                        <!-- Primera fila -->
+                        <div class="row g-3">
+
+                            <div class="col-md-6">
+                                <label id="lblTipoHabitacion" for="ddlTipoHabitacion" class="form-label">Tipo de habitación</label>
+                                <select id="ddlTipoHabitacion" asp-for="tipohabitacion" class="form-select" asp-items="Model.ddlTipoHabitacion">
+                                    
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label id="txtNumeroDeNoches" for="txtNumeroDeNoches" class="form-label">Numero de noches</label>
+                                <input id="txtNumeroDeNoches" asp-for="numerodenoches" class="form-control" type="number" />
+                            </div>
+
+                            <div class="col-md-6">
+                                <label id="lblTipoHuesped" for="ddlTipoHuesped" class="form-label">Tipo de huesped</label>
+                                <select id="ddlTipoHuesped" asp-for="tipohuesped" class="form-select">
+                                    <option value="0">Seleccione</option>
+                                    <option value="1">General</option>
+                                    <option value="2">Frecuente</option>
+                                    <option value="3">Mayorista</option>
+                                </select>
+                            </div>
+                            
+                            
+                            <div class="col-md-6">
+                                <label id="txtNumeroDeHuespedes" for="txtNumeroDeHuespedes" class="form-label">Numero de huespedes</label>
+                                <input id="txtNumeroDeHuespedes" asp-for="numerodehuespedes" class="form-control" type="number" />
+                            </div>
+
+                            <!-- Separador -->
+                            <hr class="my-4">
+
+                            <!-- Servicios adicionales -->
+                            <div class="col-12">
+                                <label class="form-label">Servicios adicionales</label>
+
+                                <div class="border rounded p-3">
+
+                                    <!-- Desayuno -->
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input"
+                                               type="checkbox"
+                                               asp-for="desayuno"
+                                               id="chkDesayuno" />
+
+                                        <label class="form-check-label fw-bold"
+                                               for="chkDesayuno">
+                                            Desayuno
+                                        </label>
+
+                                        <div class="text-muted small">
+                                            $150 por persona / noche
+                                        </div>
+                                    </div>
+
+
+                                    <!-- Estacionamiento -->
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input"
+                                               type="checkbox"
+                                               asp-for="estacionamiento"
+                                               id="chkEstacionamiento" />
+
+                                        <label class="form-check-label fw-bold"
+                                               for="chkEstacionamiento">
+                                            Estacionamiento
+                                        </label>
+
+                                        <div class="text-muted small">
+                                            $100 por noche
+                                        </div>
+                                    </div>
+
+
+                                    <!-- WiFi Premium -->
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input"
+                                               type="checkbox"
+                                               asp-for="wifiPremium"
+                                               id="chkWifiPremium" />
+
+                                        <label class="form-check-label fw-bold"
+                                               for="chkWifiPremium">
+                                            WiFi Premium
+                                        </label>
+
+                                        <div class="text-muted small">
+                                            $80 por noche
+                                        </div>
+                                    </div>
+
+
+                                    <!-- Acceso al spa -->
+                                    <div class="form-check">
+                                        <input class="form-check-input"
+                                               type="checkbox"
+                                               asp-for="accesoSpa"
+                                               id="chkAccesoSpa" />
+
+                                        <label class="form-check-label fw-bold"
+                                               for="chkAccesoSpa">
+                                            Acceso al spa
+                                        </label>
+
+                                        <div class="text-muted small">
+                                            $250 por noche
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            
+                            <div class="col-md-6">
+                                <label id="lblIva" for="txtIva" class="form-label">IVA</label>
+                                <div class="input-group">
+                                    <input id="txtIva" asp-for="iva" class="form-control" type="number" value="16" readonly />
+                                    <span class="input-group-text">%</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label id="lblDescuento" for="txtDescuento" class="form-label">Descuento</label>
+                                <div class="input-group">
+                                    <input id="txtDescuento" asp-for="descuento" placeholder="Segun el tipo de cliente" class="form-control" type="number" readonly/>
+                                    
+                                </div>
+                            </div>
+
+                            
+                            <hr class="my-4">
+                        </div>
+
+                       
+
+                        <!-- Resultado -->
+                        @if (!string.IsNullOrEmpty(Model.ResultadoOk))
+                        {
+                            <div class=" alert alert-success mt-2 p-2 text-center">
+                                @Html.Raw(Model.ResultadoOk)
+
+                            </div>
+
+                        }
+                        @if (!string.IsNullOrEmpty(Model.ResultadoNoOk))
+                        {
+                            <div class=" alert alert-danger mt-2 p-2 text-center">
+                                @Html.Raw(Model.ResultadoNoOk)
+
+                            </div>
+
+                        }
+                        <!-- Botones -->
+                        <div class="d-flex justify-content-end gap-2">
+                            <button type="reset" class="btn btn-outline-secondary" asp-page-handler="limpiar">Limpiar</button>
+                            <button type="submit" class="btn btn-info px-4" asp-page-handler="Guardar">Guardar</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
